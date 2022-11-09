@@ -1,50 +1,26 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  Button,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import CreateRequestScreen from "./src/screens/CreateRequestScreen";
 
-import { useEffect, useState } from "react";
-import { getRequests } from "./api-client";
-import RequestList from "./src/components/RequestList";
+import HomeScreen from "./src/screens/HomeScreen";
+
+const { Navigator, Screen } = createNativeStackNavigator();
 
 export default function App() {
-  const [requests, setRequests] = useState([]);
-  const [text, setText] = useState("");
-
-  function handleChangeText(txt) {
-    setText(txt);
-  }
-
-  function handleButtonPress() {
-    console.log("button pressed", text);
-  }
-
-  useEffect(() => {
-    getRequests().then((reqs) => setRequests(reqs));
-  }, []);
-
   return (
-    <SafeAreaView style={styles.container}>
-      <RequestList requests={requests}></RequestList>
-      <View>
-        <TextInput placeholder="Title" onChangeText={handleChangeText} />
-        <TextInput placeholder="Description" />
-        <Button title="Create request" onPress={handleButtonPress} />
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Navigator headerMode="none" initialRouteName="Home">
+        <Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Screen
+          name="CreateRequest"
+          component={CreateRequestScreen}
+          options={{ headerShown: false }}
+        />
+      </Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
