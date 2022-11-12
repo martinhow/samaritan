@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CreateRequestScreen from "./src/screens/CreateRequestScreen";
 
 import HomeScreen from "./src/screens/HomeScreen";
+import ViewRequestScreen from "./src/screens/ViewRequestScreen";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -18,6 +19,11 @@ export default function App() {
         <Screen
           name="CreateRequest"
           component={CreateRequestScreen}
+          options={{ headerShown: false }}
+        />
+        <Screen
+          name="ViewRequest"
+          component={ViewRequestScreen}
           options={{ headerShown: false }}
         />
       </Navigator>

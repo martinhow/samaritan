@@ -35,7 +35,11 @@ export default function CreateRequestScreen({ navigation }) {
     };
     console.log("create request button pressed");
 
-    postRequest(request).then((response) => console.log(response));
+    postRequest(request).then((response) => {
+      console.log(response);
+      console.log("successful!");
+      navigation.navigate("Home");
+    });
   }
 
   function cancel() {

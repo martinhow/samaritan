@@ -1,6 +1,7 @@
 import {
   Button,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -24,7 +25,9 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <RequestList requests={requests}></RequestList>
+      <ScrollView style={styles.scrollView}>
+        <RequestList requests={requests}></RequestList>
+      </ScrollView>
       <Button title="Create request" onPress={createRequest} />
     </SafeAreaView>
   );
@@ -36,5 +39,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  scrollView: {
+    flexGrow: 1,
+    width: "100%",
   },
 });

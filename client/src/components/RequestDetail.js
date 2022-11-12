@@ -1,10 +1,19 @@
 import { StyleSheet, Text, View } from "react-native";
+import GoToButton from "./GoToButton";
 
 export default function RequestDetail({ request }) {
   return (
     <View style={styles.container}>
-      <Text>{request.title}</Text>
-      <Text>{request.description}</Text>
+      <Text>created by: {request.created_by}</Text>
+      <Text>created at: {request.created_at}</Text>
+      <Text>title: {request.title}</Text>
+      <Text>description: {request.description}</Text>
+      <Text>perk: {request.perk}</Text>
+      <GoToButton
+        title="View this request"
+        screenName="ViewRequest"
+        params={{ request: request }}
+      />
     </View>
   );
 }
