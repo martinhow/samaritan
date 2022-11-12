@@ -6,13 +6,21 @@ export default function ViewRequestScreen({ route, navigation }) {
   console.log("route params", route.params);
   return (
     <View style={styles.container}>
-      <Text>ViewRequestScreen</Text>
       <Text>title: {request.title}</Text>
       <Text>created by: {request.created_by}</Text>
       <Text>created at: {request.created_at}</Text>
       <Text>description: {request.description}</Text>
       <Text>perk: {request.perk}</Text>
-      <Button title="Offer Item" />
+      <Text>start date: {request.start_date || "unspecified"}</Text>
+      <Text>end date: {request.end_date || "unspecified"}</Text>
+
+      <Button
+        title="Offer Item"
+        onPress={() => {
+          console.log("item offered");
+        }}
+      />
+
       <Button
         title="Back to Home"
         onPress={() => {

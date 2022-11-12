@@ -68,20 +68,23 @@ export default function CreateRequestScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Text>Title</Text>
       <TextInput
-        placeholder="Title"
+        placeholder="Add title"
         style={styles.inputTitle}
         onChangeText={handleChangeTitle}
       />
+      <Text>Description</Text>
       <TextInput
         multiline={true}
-        placeholder="Description"
+        placeholder="Add description"
         style={styles.inputDesc}
         onChangeText={handleChangeDesc}
       />
+      <Text>Perk</Text>
       <TextInput
         multiline={true}
-        placeholder="Perk"
+        placeholder="Add perk/incentive"
         multiline={true}
         style={styles.inputPerk}
         onChangeText={handleChangePerk}
