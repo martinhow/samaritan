@@ -8,7 +8,9 @@ export const postRequest = (req) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(req),
   })
-    .then((result) => result.json())
+    .then((result) => {
+      return result.json();
+    })
     .catch((error) => console.log(error));
 };
 

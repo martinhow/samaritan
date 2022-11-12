@@ -15,7 +15,6 @@ export default function HomeScreen({ navigation }) {
   const [requests, setRequests] = useState([]);
 
   function createRequest() {
-    console.log("button pressed to create request");
     navigation.navigate("CreateRequest");
   }
 
