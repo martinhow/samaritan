@@ -41,6 +41,18 @@ const getUserRequests = async (ctx, next) => {
   }
 };
 
+const getRequests = async (ctx, next) => {
+  try {
+    const body = await requestModel.find().sort({ created_at: -1 });
+    ctx.body = body; // this will update the ctx.response.body in server response
+    ctx.status = 201;
+    console.log("ctx", ctx);
+  } catch (error) {
+    console.log("error", error);
+    ctx.status = 500;
+  }
+};
+
 const getRequest = async (ctx, next) => {
   try {
     const requestId = ctx.params.id;
@@ -74,6 +86,7 @@ const updateRequest = async (ctx, next) => {
 };
 
 module.exports = {
+  getRequests,
   postUserRequest,
   getUserRequests,
   getRequest,

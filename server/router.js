@@ -11,6 +11,7 @@ router.get("/users/:id", userController.getUser);
 router.post("/users", userController.postUser);
 
 // endpoints for requests
+router.get("/requests", requestController.getRequests);
 router.post("/users/:id/requests", requestController.postUserRequest);
 router.get("/users/:id/requests", requestController.getUserRequests);
 router.get("/requests/:id", requestController.getRequest);
