@@ -21,7 +21,7 @@ export default function HomeScreen({ navigation }) {
 
   useEffect(() => {
     getRequests().then((reqs) => setRequests(reqs));
-  }, []);
+  });
 
   return (
     <SafeAreaView style={styles.container}>
