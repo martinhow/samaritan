@@ -7,8 +7,6 @@ export default function RequestDetail({ request }) {
       <Text>created by: {request.created_by}</Text>
       <Text>created at: {request.created_at}</Text>
       <Text>title: {request.title}</Text>
-      <Text>description: {request.description}</Text>
-      <Text>perk: {request.perk}</Text>
       <GoToButton
         title="View this request"
         screenName="ViewRequest"

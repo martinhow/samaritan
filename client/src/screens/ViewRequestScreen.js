@@ -8,7 +8,11 @@ export default function ViewRequestScreen({ route, navigation }) {
     <View style={styles.container}>
       <Text>ViewRequestScreen</Text>
       <Text>title: {request.title}</Text>
-      <Button title="Call user" />
+      <Text>created by: {request.created_by}</Text>
+      <Text>created at: {request.created_at}</Text>
+      <Text>description: {request.description}</Text>
+      <Text>perk: {request.perk}</Text>
+      <Button title="Offer Item" />
       <Button
         title="Back to Home"
         onPress={() => {
