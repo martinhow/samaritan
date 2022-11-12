@@ -25,9 +25,8 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <RequestList requests={requests}></RequestList>
-      </ScrollView>
+      <RequestList requests={requests}></RequestList>
+
       <Button title="Create request" onPress={createRequest} />
     </SafeAreaView>
   );
@@ -39,9 +38,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-  },
-  scrollView: {
-    flexGrow: 1,
-    width: "100%",
   },
 });

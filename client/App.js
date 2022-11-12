@@ -1,5 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import CreateItemScreen from "./src/screens/CreateItemScreen";
 import CreateRequestScreen from "./src/screens/CreateRequestScreen";
 
 import HomeScreen from "./src/screens/HomeScreen";
@@ -24,6 +25,12 @@ export default function App() {
         <Screen
           name="ViewRequest"
           component={ViewRequestScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Screen
+          name="CreateItem"
+          component={CreateItemScreen}
           options={{ headerShown: false }}
         />
       </Navigator>

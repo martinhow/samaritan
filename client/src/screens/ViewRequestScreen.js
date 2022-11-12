@@ -18,6 +18,7 @@ export default function ViewRequestScreen({ route, navigation }) {
         title="Offer Item"
         onPress={() => {
           console.log("item offered");
+          navigation.navigate("CreateItem", { requestId: request["_id"] });
         }}
       />
 

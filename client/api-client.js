@@ -1,6 +1,6 @@
 const url = "http://localhost:4000";
 
-const currentUser = "63698bb98e29cf3d33598764";
+export const currentUser = "63698bb98e29cf3d33598764";
 
 export const postRequest = (req) => {
   const requestsUrl = url + `/users/${currentUser}/requests`;
@@ -21,4 +21,17 @@ export const getRequests = () => {
     .catch((error) => {
       console.log(error);
     });
+};
+
+export const postItem = (item) => {
+  const itemsUrl = url + `/users/${currentUser}/items`;
+  return fetch(itemsUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(item),
+  })
+    .then((result) => {
+      return result.json();
+    })
+    .catch((error) => console.log(error));
 };

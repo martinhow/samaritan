@@ -5,11 +5,11 @@ import RequestDetail from "./RequestDetail";
 export default function RequestList({ requests }) {
   return (
     <ScrollView style={styles.scrollView}>
-      {/* <View style={styles.container}> */}
-      {requests.map((r) => (
-        <RequestDetail key={r._id} request={r} />
-      ))}
-      {/* </View> */}
+      <View style={styles.container}>
+        {requests.map((r) => (
+          <RequestDetail key={r._id} request={r} />
+        ))}
+      </View>
     </ScrollView>
   );
 }

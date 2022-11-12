@@ -85,7 +85,6 @@ export default function CreateRequestScreen({ navigation }) {
       <TextInput
         multiline={true}
         placeholder="Add perk/incentive"
-        multiline={true}
         style={styles.inputPerk}
         onChangeText={handleChangePerk}
       />
