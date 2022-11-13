@@ -15,7 +15,6 @@ import { launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker";
 export default function CreateItemScreen({ route, navigation }) {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
-
   const [imageUri, setImageUri] = useState(null);
 
   const { requestId } = route.params;
@@ -27,8 +26,8 @@ export default function CreateItemScreen({ route, navigation }) {
       request_id: requestId,
     };
 
-    if (!(name && desc)) {
-      console.error("name and desc should not be blank");
+    if (!(name && imageUri)) {
+      console.error("name and image should not be blank");
       return;
     }
     console.log("create item button pressed", item);
