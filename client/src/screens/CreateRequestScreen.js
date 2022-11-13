@@ -97,7 +97,7 @@ export default function CreateRequestScreen({ navigation }) {
         is24Hour={true}
         display="default"
         onChange={onChangeStartDate}
-        style={{ width: 320, backgroundColor: "white" }} //add this
+        style={styles.dateTimePicker}
       />
 
       <Text>end date</Text>
@@ -108,32 +108,59 @@ export default function CreateRequestScreen({ navigation }) {
         is24Hour={true}
         display="default"
         onChange={onChangeEndDate}
-        style={{ width: 320, backgroundColor: "white" }} //add this
+        style={styles.dateTimePicker}
       />
 
-      <Button title="Create request" onPress={handleButtonPress} />
-      <Button title="Cancel" onPress={cancel} />
+      <View style={styles.buttonContainer}>
+        <Button title="Cancel" onPress={cancel} />
+        <Button
+          style={styles.createRequestButton}
+          title="Create request"
+          onPress={handleButtonPress}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
     justifyContent: "center",
+    padding: 30,
   },
   inputTitle: {
-    width: 200,
-    textAlign: "center",
+    margin: 10,
+    padding: 10,
+    height: 50,
+    width: "100%",
+    borderRadius: 10,
+    backgroundColor: "lightgreen",
   },
   inputDesc: {
-    width: 200,
-    textAlign: "center",
+    margin: 10,
+    padding: 10,
+    height: 200,
+    width: "100%",
+    borderRadius: 10,
+    backgroundColor: "lightgreen",
   },
   inputPerk: {
-    width: 200,
-    textAlign: "center",
+    margin: 10,
+    padding: 10,
+    height: 120,
+    width: "100%",
+    borderRadius: 10,
+    backgroundColor: "lightgreen",
+  },
+  dateTimePicker: {
+    padding: 10,
+    width: 320,
+    backgroundColor: "white",
+  },
+  buttonContainer: {
+    marginTop: 30,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });

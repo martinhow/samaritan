@@ -68,22 +68,28 @@ export default function CreateItemScreen({ route, navigation }) {
     <View style={styles.container}>
       <Text>Item Name</Text>
       <TextInput
+        style={styles.inputName}
         placeholder="Add a name to your item"
         onChangeText={handleChangeItemName}
       />
 
       <Text>Item Description</Text>
       <TextInput
+        style={styles.inputDesc}
         multiline={true}
         placeholder="Add item description"
         onChangeText={handleChangeItemDesc}
       />
 
+      <Text>Item Image</Text>
+      <View>
+        {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
+      </View>
       <Button title="Pick an image from camera roll" onPress={pickImage} />
-      {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
-
-      <Button title="Give item" onPress={handleOfferButtonPress} />
-      <Button title="Back" onPress={cancel} />
+      <View style={styles.buttonContainer}>
+        <Button title="Back" onPress={cancel} />
+        <Button title="Give item" onPress={handleOfferButtonPress} />
+      </View>
     </View>
   );
 }
@@ -92,11 +98,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    padding: 30,
+  },
+  inputName: {
+    margin: 10,
+    padding: 10,
+    height: 50,
+    width: "100%",
+    borderRadius: 10,
+    backgroundColor: "lightgreen",
+  },
+  inputDesc: {
+    margin: 10,
+    padding: 10,
+    height: 200,
+    width: "100%",
+    borderRadius: 10,
+    backgroundColor: "lightgreen",
   },
   image: {
-    width: 200,
+    margin: 10,
+    width: "100%",
     height: 200,
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: "row",
+    marginTop: 10,
+    justifyContent: "space-between",
   },
 });
