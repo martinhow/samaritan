@@ -15,7 +15,7 @@ export default function App() {
         <Screen
           name="Home"
           component={HomeScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: true }}
         />
         <Screen
           name="CreateRequest"
@@ -31,7 +31,7 @@ export default function App() {
         <Screen
           name="CreateItem"
           component={CreateItemScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: true }}
         />
       </Navigator>
     </NavigationContainer>
