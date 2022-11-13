@@ -1,35 +1,42 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import CreateItemScreen from "./src/screens/CreateItemScreen";
 import CreateRequestScreen from "./src/screens/CreateRequestScreen";
 
 import HomeScreen from "./src/screens/HomeScreen";
 import ViewRequestScreen from "./src/screens/ViewRequestScreen";
+import LoginScreen from "./src/screens/LoginScreen";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Navigator headerMode="none" initialRouteName="Home">
+      <Navigator headerMode="none" initialRouteName="Login">
+        <Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
         <Screen
           name="Home"
           component={HomeScreen}
           options={{ headerShown: true }}
         />
         <Screen
-          name="CreateRequest"
+          name="Create a request"
           component={CreateRequestScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: true }}
         />
         <Screen
-          name="ViewRequest"
+          name="View request"
           component={ViewRequestScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: true }}
         />
 
         <Screen
-          name="CreateItem"
+          name="Create an item"
           component={CreateItemScreen}
           options={{ headerShown: true }}
         />

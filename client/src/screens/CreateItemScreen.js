@@ -82,7 +82,7 @@ export default function CreateItemScreen({ route, navigation }) {
       <Button title="Pick an image from camera roll" onPress={pickImage} />
       {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
 
-      <Button title="Offer" onPress={handleOfferButtonPress} />
+      <Button title="Give item" onPress={handleOfferButtonPress} />
       <Button title="Back" onPress={cancel} />
     </View>
   );

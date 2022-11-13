@@ -15,10 +15,10 @@ export default function ViewRequestScreen({ route, navigation }) {
       <Text>end date: {request.end_date || "unspecified"}</Text>
 
       <Button
-        title="Offer Item"
+        title="Give an item"
         onPress={() => {
           console.log("item offered");
-          navigation.navigate("CreateItem", { requestId: request["_id"] });
+          navigation.navigate("Create an item", { requestId: request["_id"] });
         }}
       />
 

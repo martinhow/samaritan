@@ -17,7 +17,7 @@ export default function HomeScreen({ navigation }) {
   const [requests, setRequests] = useState([]);
 
   function createRequest() {
-    navigation.navigate("CreateRequest");
+    navigation.navigate("Create a request");
   }
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function HomeScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <RequestList requests={requests}></RequestList>
 
-      <Button title="Create request" onPress={createRequest} />
+      <Button title="Create a request" onPress={createRequest} />
     </SafeAreaView>
   );
 }

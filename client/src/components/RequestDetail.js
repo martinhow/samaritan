@@ -19,7 +19,7 @@ export default function RequestDetail({ request }) {
         <Text>created at: {request.created_at}</Text>
         <GoToButton
           title="View this request"
-          screenName="ViewRequest"
+          screenName="View request"
           params={{ request: request }}
         />
       </View>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     width: 350,
     flex: 1,
     flexDirection: "row",
-    backgroundColor: "lightblue",
+    backgroundColor: "lightgreen",
     borderRadius: 20,
     margin: 5,
     padding: 10,
