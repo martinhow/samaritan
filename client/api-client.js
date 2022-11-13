@@ -58,5 +58,10 @@ const postImageToItem = async (imageUri, newItemId) => {
     method: "POST",
     headers: { "Content-Type": "multipart/form-data" },
     body: data,
-  }).catch((error) => console.log(error));
+  })
+    .then((res) => {
+      console.log("success image item post");
+      return res;
+    })
+    .catch((error) => console.error(error));
 };

@@ -19,7 +19,7 @@ export default function CreateItemScreen({ route, navigation }) {
 
   const { requestId } = route.params;
 
-  function handleButtonPress() {
+  function handleOfferButtonPress() {
     const item = {
       name: name,
       description: desc,
@@ -57,7 +57,7 @@ export default function CreateItemScreen({ route, navigation }) {
       mediaTypes: MediaTypeOptions.Image,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1,
+      quality: 0,
     }).then((result) => {
       if (!result.cancelled) {
         setImageUri(result.uri);
@@ -82,7 +82,7 @@ export default function CreateItemScreen({ route, navigation }) {
       <Button title="Pick an image from camera roll" onPress={pickImage} />
       {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
 
-      <Button title="Offer" onPress={handleButtonPress} />
+      <Button title="Offer" onPress={handleOfferButtonPress} />
       <Button title="Back" onPress={cancel} />
     </View>
   );
