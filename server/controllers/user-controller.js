@@ -29,7 +29,6 @@ const postUser = async (ctx, next) => {
     const doc = await userModel.create(body);
     ctx.body = doc; // this will update the ctx.response.body in server response
     ctx.status = 201;
-    console.log("ctx", ctx);
   } catch (error) {
     console.log("error", error);
     ctx.status = 500;

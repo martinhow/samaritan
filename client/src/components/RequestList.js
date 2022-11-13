@@ -6,9 +6,9 @@ export default function RequestList({ requests }) {
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
-        {requests.map((r) => (
-          <RequestDetail key={r._id} request={r} />
-        ))}
+        {requests &&
+          requests.map((r) => <RequestDetail key={r._id} request={r} />)}
+        <Text> {!requests && "no fetched requests!"}</Text>
       </View>
     </ScrollView>
   );

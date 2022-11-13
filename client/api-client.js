@@ -17,15 +17,18 @@ export const postRequest = (req) => {
 
 export const getRequests = () => {
   return fetch(`${url}/requests`)
-    .then((result) => result.json())
+    .then((result) => {
+      return result.json();
+    })
     .catch((error) => {
       console.log(error);
     });
 };
 
-export const postItem = (item) => {
-  const itemsUrl = url + `/users/${currentUser}/items`;
-  return fetch(itemsUrl, {
+export const postItem = async (item, imageUri) => {
+  const itemsUrl = `${url}/users/${currentUser}/items`;
+
+  const newItem = await fetch(itemsUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(item),
@@ -34,4 +37,26 @@ export const postItem = (item) => {
       return result.json();
     })
     .catch((error) => console.log(error));
+
+  const newItemId = newItem["_id"];
+  await postImageToItem(imageUri, newItemId);
+  return newItem;
+};
+
+const postImageToItem = async (imageUri, newItemId) => {
+  const data = new FormData();
+  const fileName = imageUri.substring(imageUri.lastIndexOf("/") + 1);
+
+  data.append("image", {
+    name: fileName,
+    type: "image",
+    uri: imageUri,
+  });
+
+  const itemImageUrl = `${url}/items/${newItemId}/images`;
+  return fetch(itemImageUrl, {
+    method: "POST",
+    headers: { "Content-Type": "multipart/form-data" },
+    body: data,
+  }).catch((error) => console.log(error));
 };

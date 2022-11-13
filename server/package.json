@@ -10,12 +10,14 @@
   "license": "ISC",
   "dependencies": {
     "@koa/cors": "^3.3.0",
+    "@koa/multer": "^3.0.0",
     "@koa/router": "^10.1.1",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-server": "^1.2.2",
     "koa-static": "^5.0.0",
     "mongodb": "^4.4.1",
-    "mongoose": "^6.2.9"
+    "mongoose": "^6.2.9",
+    "multer": "^1.4.5-lts.1"
   }
 }

@@ -1,4 +1,5 @@
 import {
+  Image,
   Button,
   SafeAreaView,
   ScrollView,
@@ -38,5 +39,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  image: {
+    height: 200,
+    width: 200,
   },
 });

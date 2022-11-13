@@ -5,14 +5,13 @@ const { Schema } = mongoose;
 
 const imageSchema = new Schema({
   file_name: String,
-  description: String,
   item_id: Schema.Types.ObjectId,
   image: {
     data: Buffer,
-    contentType: String,
+    mime_type: String,
   },
 });
 
-const item = mongoose.model("Items", itemSchema);
+const ItemImage = mongoose.model("ItemImages", imageSchema);
 
-module.exports = Item;
+module.exports = ItemImage;

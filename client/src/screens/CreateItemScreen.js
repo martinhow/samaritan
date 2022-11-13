@@ -1,5 +1,6 @@
 import {
   Button,
+  Image,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -9,10 +10,14 @@ import {
 import React from "react";
 import { useEffect, useState } from "react";
 import { postItem } from "../../api-client";
+import { launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker";
 
 export default function CreateItemScreen({ route, navigation }) {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
+
+  const [imageUri, setImageUri] = useState(null);
+
   const { requestId } = route.params;
 
   function handleButtonPress() {
@@ -28,7 +33,7 @@ export default function CreateItemScreen({ route, navigation }) {
     }
     console.log("create item button pressed", item);
 
-    postItem(item).then((response) => {
+    postItem(item, imageUri).then((response) => {
       console.log(response);
       console.log("post item successful!");
       navigation.navigate("Home");
@@ -47,6 +52,19 @@ export default function CreateItemScreen({ route, navigation }) {
     navigation.navigate("Home");
   }
 
+  function pickImage() {
+    // No permissions request is necessary for launching the image library
+    launchImageLibraryAsync({
+      mediaTypes: MediaTypeOptions.Image,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    }).then((result) => {
+      if (!result.cancelled) {
+        setImageUri(result.uri);
+      }
+    });
+  }
   return (
     <View style={styles.container}>
       <Text>Item Name</Text>
@@ -62,6 +80,9 @@ export default function CreateItemScreen({ route, navigation }) {
         onChangeText={handleChangeItemDesc}
       />
 
+      <Button title="Pick an image from camera roll" onPress={pickImage} />
+      {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
+
       <Button title="Offer" onPress={handleButtonPress} />
       <Button title="Back" onPress={cancel} />
     </View>
@@ -75,16 +96,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  inputTitle: {
+  image: {
     width: 200,
-    textAlign: "center",
-  },
-  inputDesc: {
-    width: 200,
-    textAlign: "center",
-  },
-  inputPerk: {
-    width: 200,
-    textAlign: "center",
+    height: 200,
   },
 });
