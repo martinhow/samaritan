@@ -23,6 +23,18 @@ const getUser = async (ctx, next) => {
   }
 };
 
+const getUserByEmail = async (ctx, next) => {
+  try {
+    const email = ctx.request.body.email;
+    const body = await userModel.findOne({ email_address: email });
+    ctx.status = 200;
+    ctx.body = body;
+  } catch (error) {
+    console.log("error get find", error);
+    ctx.response.status = 500;
+  }
+};
+
 const postUser = async (ctx, next) => {
   try {
     const body = await ctx.request.body;
@@ -35,4 +47,4 @@ const postUser = async (ctx, next) => {
   }
 };
 
-module.exports = { getUser, getUsers, postUser };
+module.exports = { getUser, getUsers, postUser, getUserByEmail };

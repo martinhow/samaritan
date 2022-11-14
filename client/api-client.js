@@ -1,6 +1,44 @@
 const url = "http://localhost:4000";
 
-export const currentUser = "636a7409a895f649021599df";
+let currentUser;
+
+export const getCurrentUser = () => {
+  return currentUser;
+};
+
+export const setCurrentUser = (userId) => {
+  console.log("current user id set", userId);
+  currentUser = userId;
+};
+
+export const loginUser = async (email, password) => {
+  console.log("login", { email: email, password: password });
+  const user = await fetch(`${url}/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: email,
+    }),
+  })
+    .then((result) => {
+      return result.json();
+    })
+    .catch((error) => console.log(error));
+
+  setCurrentUser(user["_id"]);
+  console.log("success login");
+  return user;
+};
+
+export const getUser = async (userId) => {
+  return fetch(`${url}/users/${userId}`)
+    .then((result) => {
+      return result.json();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 export const postRequest = (req) => {
   const requestsUrl = `${url}/users/${currentUser}/requests`;

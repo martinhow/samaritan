@@ -11,9 +11,24 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { color } from "../color";
+import { loginUser } from "../../api-client";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function login() {
+    console.log("logiin", { email: email, password: password });
+    if (!(email && password)) {
+      console.error("Please input email and password.");
+    } else {
+      loginUser(email, password)
+        .then(() => navigation.navigate("Home"))
+        .catch((e) => {
+          console.error("login error", e);
+        });
+    }
+  }
 
   return (
     // <View>
@@ -27,19 +42,18 @@ export default function LoginScreen({ navigation }) {
       ></Image>
       <Text style={styles.title}>Samaritan</Text>
 
-      <TextInput style={styles.emailInput} placeholder="email address" />
+      <TextInput
+        style={styles.emailInput}
+        placeholder="email address"
+        onChangeText={(t) => setEmail(t)}
+      />
       <TextInput
         secureTextEntry={true}
         style={styles.passwordInput}
         placeholder="password"
+        onChangeText={(t) => setPassword(t)}
       />
-      <Pressable
-        title="Log in"
-        style={styles.loginButton}
-        onPress={() => {
-          navigation.navigate("Home");
-        }}
-      >
+      <Pressable title="Log in" style={styles.loginButton} onPress={login}>
         <Text style={styles.loginButtonText}> Log in</Text>
       </Pressable>
     </ImageBackground>

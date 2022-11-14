@@ -9,12 +9,14 @@ import {
 } from "react-native";
 import React from "react";
 import { color } from "../color";
-import { currentUser } from "../../api-client";
+import { getCurrentUser } from "../../api-client";
 
 export default function ViewRequestScreen({ route, navigation }) {
   const { request } = route.params;
 
   const requesterNumber = "07907295128";
+
+  const currentUser = getCurrentUser();
 
   function formatDate(dateString) {
     return new Date(dateString).toLocaleString();
