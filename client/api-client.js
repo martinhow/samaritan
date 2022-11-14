@@ -65,3 +65,19 @@ const postImageToItem = async (imageUri, newItemId) => {
     })
     .catch((error) => console.error(error));
 };
+
+export const patchRequest = async (requestId) => {
+  const requestsUrl = url + `/requests/${requestId}`;
+
+  await fetch(requestUrl, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      status: "TAKEN",
+    }),
+  })
+    .then((result) => {
+      return result.json();
+    })
+    .catch((error) => console.log(error));
+};

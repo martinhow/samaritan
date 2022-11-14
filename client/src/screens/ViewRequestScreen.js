@@ -1,9 +1,11 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View, Linking } from "react-native";
 import React from "react";
 
 export default function ViewRequestScreen({ route, navigation }) {
   const { request } = route.params;
   console.log("route params", route.params);
+  const requesterNumber = "07907295128";
+
   return (
     <View style={styles.container}>
       <Text>title: {request.title}</Text>
@@ -26,6 +28,13 @@ export default function ViewRequestScreen({ route, navigation }) {
         title="Back to Home"
         onPress={() => {
           navigation.navigate("Home");
+        }}
+      />
+
+      <Button
+        title="Call Requester"
+        onPress={() => {
+          Linking.openURL(`tel:${requesterNumber}`);
         }}
       />
     </View>

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React from "react";
 import { useEffect, useState } from "react";
-import { postItem } from "../../api-client";
+import { patchRequest, postItem } from "../../api-client";
 import { launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker";
 
 export default function CreateItemScreen({ route, navigation }) {
@@ -37,6 +37,12 @@ export default function CreateItemScreen({ route, navigation }) {
       console.log("post item successful!");
       navigation.navigate("Home");
     });
+
+    updateRequestStatus(requestId);
+  }
+
+  function updateRequestStatus(requestId) {
+    patchRequest(requestId);
   }
 
   function handleChangeItemName(n) {

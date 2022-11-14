@@ -10,7 +10,7 @@ const requestSchema = new Schema(
     perk: String,
     status: {
       type: String,
-      enum: ["OPEN", "PROCESSING", "CLOSED"],
+      enum: ["OPEN", "TAKEN"],
       default: "OPEN",
     },
     created_by: Schema.Types.ObjectId,
