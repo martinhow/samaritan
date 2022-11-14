@@ -1,7 +1,7 @@
 import Constants from "expo-constants";
 const { manifest } = Constants;
 
-const url = `http://${manifest.debuggerHost.split(":").shift()}:4000`;
+const url = "http://localhost:4000";
 
 let currentUser;
 
@@ -19,7 +19,6 @@ export const setCurrentUser = (user) => {
 };
 
 export const loginUser = async (email, password) => {
-  console.log("login", { email: email, password: password });
   const user = await fetch(`${url}/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -27,7 +26,7 @@ export const loginUser = async (email, password) => {
       email: email,
     }),
   }).then((result) => {
-    if (result.status == 200) {
+    if (result.status === 200) {
       return result.json();
     } else {
       throw "unsuccessful login";
