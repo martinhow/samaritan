@@ -6,6 +6,8 @@ import {
   Linking,
   TouchableOpacity,
   ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { useState, useEffect } from "react";
 import { color } from "../color";

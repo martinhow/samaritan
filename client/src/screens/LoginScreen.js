@@ -8,6 +8,8 @@ import {
   ImageBackground,
   TouchableOpacity,
   Image,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { useState } from "react";
 import { color } from "../color";
@@ -34,33 +36,33 @@ export default function LoginScreen({ navigation }) {
   }
 
   return (
-    // <View>
-    <ImageBackground
-      style={styles.background}
-      source={require("../../assets/welcome2.jpg")}
-    >
-      <Image
-        style={styles.logo}
-        source={require("../../assets/marmoset.png")}
-      ></Image>
-      <Text style={styles.title}>Samaritan</Text>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <ImageBackground
+        style={styles.background}
+        source={require("../../assets/welcome2.jpg")}
+      >
+        <Image
+          style={styles.logo}
+          source={require("../../assets/marmoset.png")}
+        ></Image>
+        <Text style={styles.title}>Samaritan</Text>
 
-      <TextInput
-        style={styles.emailInput}
-        placeholder="email address"
-        onChangeText={(t) => setEmail(t)}
-      />
-      <TextInput
-        secureTextEntry={true}
-        style={styles.passwordInput}
-        placeholder="password"
-        onChangeText={(t) => setPassword(t)}
-      />
-      <Pressable title="Log in" style={styles.loginButton} onPress={login}>
-        <Text style={styles.loginButtonText}> Log in</Text>
-      </Pressable>
-    </ImageBackground>
-    // </View>
+        <TextInput
+          style={styles.emailInput}
+          placeholder="email address"
+          onChangeText={(t) => setEmail(t)}
+        />
+        <TextInput
+          secureTextEntry={true}
+          style={styles.passwordInput}
+          placeholder="password"
+          onChangeText={(t) => setPassword(t)}
+        />
+        <Pressable title="Log in" style={styles.loginButton} onPress={login}>
+          <Text style={styles.loginButtonText}> Log in</Text>
+        </Pressable>
+      </ImageBackground>
+    </TouchableWithoutFeedback>
   );
 }
 

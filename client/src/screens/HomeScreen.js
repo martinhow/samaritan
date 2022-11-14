@@ -1,5 +1,4 @@
 import {
-  Image,
   Button,
   SafeAreaView,
   ScrollView,
@@ -10,7 +9,11 @@ import {
 } from "react-native";
 
 import { useEffect, useState } from "react";
-import { getCurrentUserName, getRequests } from "../../api-client";
+import {
+  getCurrentUserName,
+  getRequests,
+  setCurrentUser,
+} from "../../api-client";
 import RequestList from "../components/RequestList";
 import { color } from "../color";
 
@@ -30,7 +33,16 @@ export default function HomeScreen({ navigation }) {
       <Text style={styles.helloMessage}>Hi {getCurrentUserName()}!</Text>
       <RequestList requests={requests}></RequestList>
 
-      <Button title="Create a request" onPress={createRequest} />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Log out"
+          onPress={() => {
+            setCurrentUser(null);
+            navigation.navigate("Login");
+          }}
+        />
+        <Button title="Create a request" onPress={createRequest} />
+      </View>
     </SafeAreaView>
   );
 }
@@ -46,8 +58,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  image: {
-    height: 200,
-    width: 200,
+  buttonContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });

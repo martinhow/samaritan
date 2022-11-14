@@ -6,6 +6,8 @@ import {
   Text,
   TextInput,
   View,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import React from "react";
 import { useEffect, useState } from "react";
@@ -121,35 +123,39 @@ export default function CreateItemScreen({ route, navigation }) {
   });
 
   return (
-    <View style={styles.container}>
-      <Text>Item Name *</Text>
-      <TextInput
-        style={styles.inputName}
-        placeholder="Add a name to your item"
-        onChangeText={handleChangeItemName}
-      />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <Text>Item Name *</Text>
+        <TextInput
+          style={styles.inputName}
+          placeholder="Add a name to your item"
+          onChangeText={handleChangeItemName}
+        />
 
-      <Text>Item Description</Text>
-      <TextInput
-        style={styles.inputDesc}
-        multiline={true}
-        placeholder="Add item description"
-        onChangeText={handleChangeItemDesc}
-      />
+        <Text>Item Description</Text>
+        <TextInput
+          style={styles.inputDesc}
+          multiline={true}
+          placeholder="Add item description"
+          onChangeText={handleChangeItemDesc}
+        />
 
-      <Text>Item Image * </Text>
-      <View style={styles.imageContainer}>
-        {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
-        {!imageUri && (
-          <Text style={styles.imageText}>no photo selected yet</Text>
-        )}
+        <Text>Item Image * </Text>
+        <View style={styles.imageContainer}>
+          {imageUri && (
+            <Image source={{ uri: imageUri }} style={styles.image} />
+          )}
+          {!imageUri && (
+            <Text style={styles.imageText}>no photo selected yet</Text>
+          )}
+        </View>
+        <Button title="Pick an image from camera roll" onPress={pickImage} />
+
+        <View style={styles.buttonContainer}>
+          <Button title="Back" onPress={cancel} />
+          <Button title="Give item" onPress={handleOfferButtonPress} />
+        </View>
       </View>
-      <Button title="Pick an image from camera roll" onPress={pickImage} />
-
-      <View style={styles.buttonContainer}>
-        <Button title="Back" onPress={cancel} />
-        <Button title="Give item" onPress={handleOfferButtonPress} />
-      </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }

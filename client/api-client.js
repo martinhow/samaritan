@@ -1,4 +1,7 @@
-const url = "http://localhost:4000";
+import Constants from "expo-constants";
+const { manifest } = Constants;
+
+const url = `http://${manifest.debuggerHost.split(":").shift()}:4000`;
 
 let currentUser;
 

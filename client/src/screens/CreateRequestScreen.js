@@ -5,6 +5,8 @@ import {
   Text,
   TextInput,
   View,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { useEffect, useState } from "react";
 import { postRequest } from "../../api-client";
@@ -73,59 +75,61 @@ export default function CreateRequestScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <Text>Title *</Text>
-      <TextInput
-        placeholder="Add title"
-        style={styles.inputTitle}
-        onChangeText={handleChangeTitle}
-      />
-      <Text>Description *</Text>
-      <TextInput
-        multiline={true}
-        placeholder="Add description"
-        style={styles.inputDesc}
-        onChangeText={handleChangeDesc}
-      />
-      <Text>Perk</Text>
-      <TextInput
-        multiline={true}
-        placeholder="Add perk/incentive"
-        style={styles.inputPerk}
-        onChangeText={handleChangePerk}
-      />
-
-      <Text>start date *</Text>
-      <DateTimePicker
-        testID="dateTimePicker"
-        value={startDate}
-        mode="datetime"
-        is24Hour={true}
-        display="default"
-        onChange={onChangeStartDate}
-        style={styles.dateTimePicker}
-      />
-
-      <Text>end date *</Text>
-      <DateTimePicker
-        testID="dateTimePicker"
-        value={endDate}
-        mode="datetime"
-        is24Hour={true}
-        display="default"
-        onChange={onChangeEndDate}
-        style={styles.dateTimePicker}
-      />
-
-      <View style={styles.buttonContainer}>
-        <Button title="Cancel" onPress={cancel} />
-        <Button
-          style={styles.createRequestButton}
-          title="Create request"
-          onPress={handleCreateRequest}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <Text>Title *</Text>
+        <TextInput
+          placeholder="Add title"
+          style={styles.inputTitle}
+          onChangeText={handleChangeTitle}
         />
+        <Text>Description *</Text>
+        <TextInput
+          multiline={true}
+          placeholder="Add description"
+          style={styles.inputDesc}
+          onChangeText={handleChangeDesc}
+        />
+        <Text>Perk</Text>
+        <TextInput
+          multiline={true}
+          placeholder="Add perk/incentive"
+          style={styles.inputPerk}
+          onChangeText={handleChangePerk}
+        />
+
+        <Text>start date *</Text>
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={startDate}
+          mode="datetime"
+          is24Hour={true}
+          display="default"
+          onChange={onChangeStartDate}
+          style={styles.dateTimePicker}
+        />
+
+        <Text>end date *</Text>
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={endDate}
+          mode="datetime"
+          is24Hour={true}
+          display="default"
+          onChange={onChangeEndDate}
+          style={styles.dateTimePicker}
+        />
+
+        <View style={styles.buttonContainer}>
+          <Button title="Cancel" onPress={cancel} />
+          <Button
+            style={styles.createRequestButton}
+            title="Create request"
+            onPress={handleCreateRequest}
+          />
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
