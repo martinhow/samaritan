@@ -10,6 +10,7 @@ import {
   Image,
 } from "react-native";
 import { useState } from "react";
+import { color } from "../color";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     textAlign: "center",
-    backgroundColor: "green",
+    backgroundColor: color.secondaryColor,
     borderColor: "black",
     borderRadius: 5,
     marginTop: 50,

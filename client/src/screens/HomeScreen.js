@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { getRequests } from "../../api-client";
 import RequestList from "../components/RequestList";
+import { color } from "../color";
 
 export default function HomeScreen({ navigation }) {
   const [requests, setRequests] = useState([]);
@@ -36,7 +37,7 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
   },

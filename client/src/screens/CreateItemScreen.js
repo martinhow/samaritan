@@ -11,6 +11,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { patchRequest, postItem } from "../../api-client";
 import { launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker";
+import { color } from "../color";
 
 export default function CreateItemScreen({ route, navigation }) {
   const [name, setName] = useState("");
@@ -70,9 +71,58 @@ export default function CreateItemScreen({ route, navigation }) {
       }
     });
   }
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "#fff",
+      padding: 30,
+    },
+    inputName: {
+      margin: 10,
+      padding: 10,
+      height: 50,
+      width: "100%",
+      borderRadius: 10,
+      borderColor: color.secondaryColor,
+      borderWidth: 2,
+    },
+    inputDesc: {
+      margin: 10,
+      padding: 10,
+      height: 200,
+      width: "100%",
+      borderRadius: 10,
+      borderColor: color.secondaryColor,
+      borderWidth: 2,
+    },
+    image: {
+      width: "100%",
+      height: "100%",
+    },
+    imageContainer: {
+      height: "30%",
+      width: "100%",
+      margin: 10,
+      borderRadius: 10,
+      borderColor: imageUri ? "white" : color.secondaryColor,
+      borderWidth: 2,
+    },
+    imageText: {
+      padding: 10,
+      color: "lightgrey",
+    },
+    buttonContainer: {
+      flex: 1,
+      flexDirection: "row",
+      marginTop: 10,
+      justifyContent: "space-between",
+    },
+  });
+
   return (
     <View style={styles.container}>
-      <Text>Item Name</Text>
+      <Text>Item Name *</Text>
       <TextInput
         style={styles.inputName}
         placeholder="Add a name to your item"
@@ -87,11 +137,15 @@ export default function CreateItemScreen({ route, navigation }) {
         onChangeText={handleChangeItemDesc}
       />
 
-      <Text>Item Image</Text>
-      <View>
+      <Text>Item Image * </Text>
+      <View style={styles.imageContainer}>
         {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
+        {!imageUri && (
+          <Text style={styles.imageText}>no photo selected yet</Text>
+        )}
       </View>
       <Button title="Pick an image from camera roll" onPress={pickImage} />
+
       <View style={styles.buttonContainer}>
         <Button title="Back" onPress={cancel} />
         <Button title="Give item" onPress={handleOfferButtonPress} />
@@ -99,38 +153,3 @@ export default function CreateItemScreen({ route, navigation }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 30,
-  },
-  inputName: {
-    margin: 10,
-    padding: 10,
-    height: 50,
-    width: "100%",
-    borderRadius: 10,
-    backgroundColor: "lightgreen",
-  },
-  inputDesc: {
-    margin: 10,
-    padding: 10,
-    height: 200,
-    width: "100%",
-    borderRadius: 10,
-    backgroundColor: "lightgreen",
-  },
-  image: {
-    margin: 10,
-    width: "100%",
-    height: 200,
-  },
-  buttonContainer: {
-    flex: 1,
-    flexDirection: "row",
-    marginTop: 10,
-    justifyContent: "space-between",
-  },
-});

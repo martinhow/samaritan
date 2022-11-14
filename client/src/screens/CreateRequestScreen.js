@@ -9,14 +9,20 @@ import {
 import { useEffect, useState } from "react";
 import { postRequest } from "../../api-client";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { color } from "../color";
 
 export default function CreateRequestScreen({ navigation }) {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [perk, setPerk] = useState("");
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  // default duration is 1 day
+  const now = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const [startDate, setStartDate] = useState(now);
+  const [endDate, setEndDate] = useState(tomorrow);
 
   function handleChangeTitle(t) {
     setTitle(t);
@@ -30,7 +36,7 @@ export default function CreateRequestScreen({ navigation }) {
     setPerk(t);
   }
 
-  function handleButtonPress() {
+  function handleCreateRequest() {
     const request = {
       title: title,
       description: desc,
@@ -39,7 +45,7 @@ export default function CreateRequestScreen({ navigation }) {
       end_date: endDate,
     };
 
-    if (!(title && desc)) {
+    if (!(title && desc && startDate && endDate)) {
       console.error("title and desc should not be blank");
       return;
     }
@@ -68,13 +74,13 @@ export default function CreateRequestScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>Title</Text>
+      <Text>Title *</Text>
       <TextInput
         placeholder="Add title"
         style={styles.inputTitle}
         onChangeText={handleChangeTitle}
       />
-      <Text>Description</Text>
+      <Text>Description *</Text>
       <TextInput
         multiline={true}
         placeholder="Add description"
@@ -89,7 +95,7 @@ export default function CreateRequestScreen({ navigation }) {
         onChangeText={handleChangePerk}
       />
 
-      <Text>start date</Text>
+      <Text>start date *</Text>
       <DateTimePicker
         testID="dateTimePicker"
         value={startDate}
@@ -100,7 +106,7 @@ export default function CreateRequestScreen({ navigation }) {
         style={styles.dateTimePicker}
       />
 
-      <Text>end date</Text>
+      <Text>end date *</Text>
       <DateTimePicker
         testID="dateTimePicker"
         value={endDate}
@@ -116,7 +122,7 @@ export default function CreateRequestScreen({ navigation }) {
         <Button
           style={styles.createRequestButton}
           title="Create request"
-          onPress={handleButtonPress}
+          onPress={handleCreateRequest}
         />
       </View>
     </View>
@@ -135,7 +141,8 @@ const styles = StyleSheet.create({
     height: 50,
     width: "100%",
     borderRadius: 10,
-    backgroundColor: "lightgreen",
+    borderColor: color.secondaryColor,
+    borderWidth: 2,
   },
   inputDesc: {
     margin: 10,
@@ -143,7 +150,8 @@ const styles = StyleSheet.create({
     height: 200,
     width: "100%",
     borderRadius: 10,
-    backgroundColor: "lightgreen",
+    borderColor: color.secondaryColor,
+    borderWidth: 2,
   },
   inputPerk: {
     margin: 10,
@@ -151,12 +159,13 @@ const styles = StyleSheet.create({
     height: 120,
     width: "100%",
     borderRadius: 10,
-    backgroundColor: "lightgreen",
+    borderColor: color.secondaryColor,
+    borderWidth: 2,
   },
   dateTimePicker: {
+    margin: 10,
     padding: 10,
-    width: 320,
-    backgroundColor: "white",
+    width: "70%",
   },
   buttonContainer: {
     marginTop: 30,
