@@ -23,7 +23,11 @@ export default function LoginScreen({ navigation }) {
       console.error("Please input email and password.");
     } else {
       loginUser(email, password)
-        .then(() => navigation.navigate("Home"))
+        .then(() => {
+          setCurrentUser(user["_id"]);
+          console.log("successful login");
+          navigation.navigate("Home");
+        })
         .catch((e) => {
           console.error("login error", e);
         });

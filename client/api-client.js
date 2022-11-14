@@ -25,8 +25,6 @@ export const loginUser = async (email, password) => {
     })
     .catch((error) => console.log(error));
 
-  setCurrentUser(user["_id"]);
-  console.log("success login");
   return user;
 };
 
