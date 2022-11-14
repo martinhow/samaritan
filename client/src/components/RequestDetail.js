@@ -24,10 +24,15 @@ export default function RequestDetail({ request }) {
     <View style={styles.container}>
       <View style={styles.requestDetailContainer}>
         <View style={styles.requestStatusContainer}>
-          <Text>{request.status}</Text>
+          {request.status === "OPEN" && (
+            <Text style={styles.statusOpen}>{request.status}</Text>
+          )}
+          {request.status === "TAKEN" && (
+            <Text style={styles.statusTaken}>{request.status}</Text>
+          )}
         </View>
         <View style={styles.requestDetail}>
-          <Text style={styles.requestTitle}> {request.title}</Text>
+          <Text style={styles.requestTitle}> {request.title} </Text>
           {/* <Text>created by: {request.created_by}</Text> */}
         </View>
         <View style={styles.viewDetailLinkContainer}>
@@ -52,25 +57,24 @@ const styles = StyleSheet.create({
     width: 350,
     flex: 1,
     flexDirection: "row",
-    backgroundColor: color.primaryColor,
+    borderColor: color.secondaryColor,
+    borderWidth: 2,
     borderRadius: 20,
     justifyContent: "space-between",
-    margin: 5,
+
     padding: 5,
   },
   requestStatusContainer: {
-    width: "15%",
-    backgroundColor: color.primaryColor,
+    width: "20%",
     justifyContent: "center",
-    padding: 5,
+    alignItems: "center",
   },
   requestDetail: {
-    width: "65%",
+    width: "60%",
     justifyContent: "center",
   },
   viewDetailLinkContainer: {
     width: "20%",
-    backgroundColor: color.primaryColor,
     justifyContent: "center",
   },
   requestTitle: {
@@ -78,7 +82,16 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   createdAt: {
+    marginTop: 5,
     textAlign: "right",
     color: "grey",
+  },
+  statusOpen: {
+    padding: 5,
+    backgroundColor: color.primaryColor,
+  },
+  statusTaken: {
+    padding: 5,
+    backgroundColor: "lightgrey",
   },
 });

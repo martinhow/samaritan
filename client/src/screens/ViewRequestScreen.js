@@ -5,6 +5,7 @@ import {
   View,
   Linking,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import { color } from "../color";
@@ -26,9 +27,17 @@ export default function ViewRequestScreen({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <View>
-        {/* <Text>created by: {request.created_by}</Text>
-        <Text>created at: {request.created_at}</Text> */}
+      <Text style={styles.updatedAt}>last updated: {request.updated_at}</Text>
+      <ScrollView style={{ width: "100%" }}>
+        <View style={styles.statusContainer}>
+          <Text
+            style={
+              request.status === "OPEN" ? styles.statusOpen : styles.statusTaken
+            }
+          >
+            {request.status}
+          </Text>
+        </View>
 
         <View style={styles.fieldContainer}>
           <Text style={styles.fieldLabel}>title:</Text>
@@ -60,24 +69,25 @@ export default function ViewRequestScreen({ route, navigation }) {
             {request.end_date ? formatDate(request.end_date) : "unspecified"}
           </Text>
         </View>
-      </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={callRequester}>
-          <Text style={styles.buttonText}>Call Requester</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          title="Give an item"
-          onPress={() => {
-            navigation.navigate("Create an item", {
-              requestId: request["_id"],
-            });
-          }}
-        >
-          <Text style={styles.buttonText}>Give an item</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={callRequester}>
+            <Text style={styles.buttonText}>Call Requester</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            title="Give an item"
+            onPress={() => {
+              navigation.navigate("Create an item", {
+                requestId: request["_id"],
+              });
+            }}
+          >
+            <Text style={styles.buttonText}>Give an item</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+
       <Button
         title="Back to Home"
         onPress={() => {
@@ -121,9 +131,32 @@ const styles = StyleSheet.create({
   },
   fieldValue: {
     borderRadius: 5,
-    borderColor: "lightgrey",
-    borderWidth: 1,
+    borderColor: color.secondaryColor,
+    borderWidth: 2,
     fontSize: 16,
     padding: 10,
+  },
+  statusContainer: {
+    flexDirection: "row-reverse",
+    marginBottom: 10,
+    marginLeft: 10,
+  },
+  statusOpen: {
+    textAlign: "center",
+
+    padding: 10,
+    backgroundColor: color.primaryColor,
+  },
+  statusTaken: {
+    textAlign: "center",
+
+    padding: 10,
+    backgroundColor: "lightgrey",
+  },
+  updatedAt: {
+    marginBottom: 20,
+    textAlign: "left",
+    color: "grey",
+    fontSize: 12,
   },
 });
