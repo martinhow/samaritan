@@ -30,7 +30,8 @@ export const loginUser = async (email, password) => {
   return user;
 };
 
-export const getUser = async (userId) => {
+export const getUser = (userId) => {
+  console.log("get userId", userId);
   return fetch(`${url}/users/${userId}`)
     .then((result) => {
       return result.json();

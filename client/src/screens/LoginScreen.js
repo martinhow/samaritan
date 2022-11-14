@@ -18,7 +18,7 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState("");
 
   function login() {
-    console.log("logiin", { email: email, password: password });
+    console.log("login", { email: email, password: password });
     if (!(email && password)) {
       console.error("Please input email and password.");
     } else {

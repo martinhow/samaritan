@@ -7,14 +7,23 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React from "react";
+import { useState, useEffect } from "react";
 import { color } from "../color";
-import { getCurrentUser } from "../../api-client";
+import { getCurrentUser, getUser } from "../../api-client";
 
 export default function ViewRequestScreen({ route, navigation }) {
   const { request } = route.params;
 
-  const requesterNumber = "07907295128";
+  const [requester, setRequester] = useState(null);
+
+  useEffect(() => {
+    getUser(request.created_by)
+      .then((user) => {
+        console.log("succesful get of requester", user);
+        setRequester(user);
+      })
+      .catch((err) => console.error("error fetching requester info", err));
+  }, []);
 
   const currentUser = getCurrentUser();
 
@@ -23,14 +32,23 @@ export default function ViewRequestScreen({ route, navigation }) {
   }
 
   function callRequester() {
-    Linking.openURL(`tel://${requesterNumber}`)
-      .then(() => console.log("calling"))
-      .catch((err) => console.error(err));
+    if (!requester.mobile_number) {
+      console.error("requester mobile number not found");
+    } else {
+      Linking.openURL(`tel://${requesterNumber}`)
+        .then(() => console.log("calling"))
+        .catch((err) => console.error(err));
+    }
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.updatedAt}>last updated: {request.updated_at}</Text>
+      {requester && (
+        <Text style={styles.updatedAt}>
+          created by: {`${requester.first_name} ${requester.last_name}`}
+        </Text>
+      )}
       <ScrollView style={{ width: "100%" }}>
         <View style={styles.statusContainer}>
           <Text
