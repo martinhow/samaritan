@@ -15,6 +15,7 @@ const getUser = async (ctx, next) => {
   try {
     const userId = ctx.params.id;
     const body = await userModel.findById(userId);
+    console.log("getUser", body);
     ctx.status = 200;
     ctx.body = body;
   } catch (error) {
@@ -27,8 +28,16 @@ const getUserByEmail = async (ctx, next) => {
   try {
     const email = ctx.request.body.email;
     const body = await userModel.findOne({ email_address: email });
-    ctx.status = 200;
-    ctx.body = body;
+    console.log("getUserByEmail", body);
+    if (!body) {
+      ctx.response.status = 500;
+      ctx.body = {
+        message: "user not found",
+      };
+    } else {
+      ctx.response.status = 200;
+      ctx.body = body;
+    }
   } catch (error) {
     console.log("error get find", error);
     ctx.response.status = 500;

@@ -2,13 +2,17 @@ const url = "http://localhost:4000";
 
 let currentUser;
 
-export const getCurrentUser = () => {
-  return currentUser;
+export const getCurrentUserId = () => {
+  return currentUser["_id"];
 };
 
-export const setCurrentUser = (userId) => {
-  console.log("current user id set", userId);
-  currentUser = userId;
+export const getCurrentUserName = () => {
+  return `${currentUser.first_name} ${currentUser.last_name}`;
+};
+
+export const setCurrentUser = (user) => {
+  console.log("current user ", user);
+  currentUser = user;
 };
 
 export const loginUser = async (email, password) => {
@@ -19,11 +23,13 @@ export const loginUser = async (email, password) => {
     body: JSON.stringify({
       email: email,
     }),
-  })
-    .then((result) => {
+  }).then((result) => {
+    if (result.status == 200) {
       return result.json();
-    })
-    .catch((error) => console.log(error));
+    } else {
+      throw "unsuccessful login";
+    }
+  });
 
   return user;
 };
@@ -40,7 +46,7 @@ export const getUser = (userId) => {
 };
 
 export const postRequest = (req) => {
-  const requestsUrl = `${url}/users/${currentUser}/requests`;
+  const requestsUrl = `${url}/users/${getCurrentUserId()}/requests`;
   return fetch(requestsUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -63,7 +69,7 @@ export const getRequests = () => {
 };
 
 export const postItem = async (item, imageUri) => {
-  const itemsUrl = `${url}/users/${currentUser}/items`;
+  const itemsUrl = `${url}/users/${getCurrentUserId()}/items`;
 
   const newItem = await fetch(itemsUrl, {
     method: "POST",

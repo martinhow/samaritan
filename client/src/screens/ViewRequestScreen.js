@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { color } from "../color";
-import { getCurrentUser, getUser } from "../../api-client";
+import { getCurrentUserId, getUser } from "../../api-client";
 
 export default function ViewRequestScreen({ route, navigation }) {
   const { request } = route.params;
@@ -25,7 +25,7 @@ export default function ViewRequestScreen({ route, navigation }) {
       .catch((err) => console.error("error fetching requester info", err));
   }, []);
 
-  const currentUser = getCurrentUser();
+  const currentUserId = getCurrentUserId();
 
   function formatDate(dateString) {
     return new Date(dateString).toLocaleString();
@@ -35,7 +35,7 @@ export default function ViewRequestScreen({ route, navigation }) {
     if (!requester.mobile_number) {
       console.error("requester mobile number not found");
     } else {
-      Linking.openURL(`tel://${requesterNumber}`)
+      Linking.openURL(`tel://${requester.mobile_number}`)
         .then(() => console.log("calling"))
         .catch((err) => console.error(err));
     }
@@ -91,7 +91,7 @@ export default function ViewRequestScreen({ route, navigation }) {
           </Text>
         </View>
 
-        {request.status === "OPEN" && request.createdBy !== currentUser && (
+        {request.status === "OPEN" && request.created_by !== currentUserId && (
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={callRequester}>
               <Text style={styles.buttonText}>Call Requester</Text>

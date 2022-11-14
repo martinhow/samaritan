@@ -11,25 +11,24 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { color } from "../color";
-import { loginUser } from "../../api-client";
+import { loginUser, setCurrentUser } from "../../api-client";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   function login() {
-    console.log("login", { email: email, password: password });
     if (!(email && password)) {
       console.error("Please input email and password.");
     } else {
-      loginUser(email, password)
-        .then(() => {
-          setCurrentUser(user["_id"]);
+      loginUser(email.toLowerCase(), password)
+        .then((user) => {
+          setCurrentUser(user);
           console.log("successful login");
           navigation.navigate("Home");
         })
         .catch((e) => {
-          console.error("login error", e);
+          console.error("login error:", e);
         });
     }
   }

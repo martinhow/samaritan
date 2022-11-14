@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import { useEffect, useState } from "react";
-import { getRequests } from "../../api-client";
+import { getCurrentUserName, getRequests } from "../../api-client";
 import RequestList from "../components/RequestList";
 import { color } from "../color";
 
@@ -27,6 +27,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.helloMessage}>Hi {getCurrentUserName()}!</Text>
       <RequestList requests={requests}></RequestList>
 
       <Button title="Create a request" onPress={createRequest} />
@@ -35,6 +36,10 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  helloMessage: {
+    margin: 30,
+    fontSize: 30,
+  },
   container: {
     flex: 1,
     backgroundColor: "white",
