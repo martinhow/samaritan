@@ -1,9 +1,9 @@
 const url = "http://localhost:4000";
 
-export const currentUser = "63698bb98e29cf3d33598764";
+export const currentUser = "636a7409a895f649021599df";
 
 export const postRequest = (req) => {
-  const requestsUrl = url + `/users/${currentUser}/requests`;
+  const requestsUrl = `${url}/users/${currentUser}/requests`;
   return fetch(requestsUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -67,7 +67,7 @@ const postImageToItem = async (imageUri, newItemId) => {
 };
 
 export const patchRequest = async (requestId) => {
-  const requestsUrl = url + `/requests/${requestId}`;
+  const requestUrl = `${url}/requests/${requestId}`;
 
   await fetch(requestUrl, {
     method: "PATCH",

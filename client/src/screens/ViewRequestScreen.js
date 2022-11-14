@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import React from "react";
 import { color } from "../color";
+import { currentUser } from "../../api-client";
 
 export default function ViewRequestScreen({ route, navigation }) {
   const { request } = route.params;
@@ -70,22 +71,24 @@ export default function ViewRequestScreen({ route, navigation }) {
           </Text>
         </View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={callRequester}>
-            <Text style={styles.buttonText}>Call Requester</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            title="Give an item"
-            onPress={() => {
-              navigation.navigate("Create an item", {
-                requestId: request["_id"],
-              });
-            }}
-          >
-            <Text style={styles.buttonText}>Give an item</Text>
-          </TouchableOpacity>
-        </View>
+        {request.status === "OPEN" && request.createdBy !== currentUser && (
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={callRequester}>
+              <Text style={styles.buttonText}>Call Requester</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              title="Give an item"
+              onPress={() => {
+                navigation.navigate("Create an item", {
+                  requestId: request["_id"],
+                });
+              }}
+            >
+              <Text style={styles.buttonText}>Give an item</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </ScrollView>
 
       <Button
